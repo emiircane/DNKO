@@ -1,0 +1,61 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\EmirPC\\Desktop\\DNKO\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{34D5A06A-6564-4BE0-B8BD-405F39EBDF37}|DNKO\\DNKO.csproj|c:\\users\\emirpc\\desktop\\dnko\\dnko\\kay\u0131t_giri\u015F.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34D5A06A-6564-4BE0-B8BD-405F39EBDF37}|DNKO\\DNKO.csproj|solutionrelative:dnko\\kay\u0131t_giri\u015F.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34D5A06A-6564-4BE0-B8BD-405F39EBDF37}|DNKO\\DNKO.csproj|C:\\Users\\EmirPC\\Desktop\\DNKO\\dnko\\kay\u0131t_giri\u015F.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{34D5A06A-6564-4BE0-B8BD-405F39EBDF37}|DNKO\\DNKO.csproj|solutionrelative:dnko\\kay\u0131t_giri\u015F.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{74946827-37a0-11d2-a273-00c04f8ef4ff}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Kay\u0131t_Giri\u015F.cs",
+              "DocumentMoniker": "C:\\Users\\EmirPC\\Desktop\\DNKO\\DNKO\\Kay\u0131t_Giri\u015F.cs",
+              "RelativeDocumentMoniker": "DNKO\\Kay\u0131t_Giri\u015F.cs",
+              "ToolTip": "C:\\Users\\EmirPC\\Desktop\\DNKO\\DNKO\\Kay\u0131t_Giri\u015F.cs",
+              "RelativeToolTip": "DNKO\\Kay\u0131t_Giri\u015F.cs",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAIwE8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T16:02:48.725Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Kay\u0131t_Giri\u015F.cs [Tasar\u0131m]",
+              "DocumentMoniker": "C:\\Users\\EmirPC\\Desktop\\DNKO\\DNKO\\Kay\u0131t_Giri\u015F.cs",
+              "RelativeDocumentMoniker": "DNKO\\Kay\u0131t_Giri\u015F.cs",
+              "ToolTip": "C:\\Users\\EmirPC\\Desktop\\DNKO\\DNKO\\Kay\u0131t_Giri\u015F.cs [Tasar\u0131m]",
+              "RelativeToolTip": "DNKO\\Kay\u0131t_Giri\u015F.cs [Tasar\u0131m]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-03T00:58:53.46Z",
+              "EditorCaption": " [Tasar\u0131m]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
