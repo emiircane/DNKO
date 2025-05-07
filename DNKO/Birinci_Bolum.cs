@@ -15,6 +15,7 @@ namespace DNKO
         public Birinci_Bolum()
         {
             InitializeComponent();
+            
         }
     }
 }

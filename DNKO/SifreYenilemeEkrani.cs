@@ -56,6 +56,10 @@ namespace DNKO
 
                     if (result > 0)
                     {
+                        // Şifre değiştirildi bildirim maili gönder
+                        MailGonderici mailGonderici = new MailGonderici();
+                        mailGonderici.SifreDegistirildiMailiGonder(mail);
+                        
                         MessageBox.Show("Şifreniz başarıyla güncellendi!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         new Kayıt_Giriş().Show();
                         this.Close();

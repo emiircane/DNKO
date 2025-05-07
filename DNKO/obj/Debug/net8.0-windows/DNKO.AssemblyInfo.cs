@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DNKO")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bd58f793286571d83c258bff9349a972c9f007ee")]
 [assembly: System.Reflection.AssemblyProductAttribute("DNKO")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DNKO")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -59,7 +59,8 @@ namespace DNKO
             MailGonderici gonderici = new MailGonderici();
             gonderici.DogrulamaKoduGonder(mail, dogrulamaKodu);
 
-            MailDogrulamaForm dogrulamaFormu = new MailDogrulamaForm();
+            // Yeni yapılandırıcıyı kullanarak MailDogrulamaForm'u başlat
+            MailDogrulamaForm dogrulamaFormu = new MailDogrulamaForm(dogrulamaKodu, mail, oyuncuadi);
             if (dogrulamaFormu.ShowDialog() == DialogResult.OK)
             {
                 if (dogrulamaFormu.GirilenKod == dogrulamaKodu)
@@ -83,6 +84,19 @@ namespace DNKO
 
                             if (sonuc > 0)
                             {
+                                // Kayıt başarılı olduğunda bilgilendirme e-postası gönder
+                                try
+                                {
+                                    MailGonderici mailGonderici = new MailGonderici();
+                                    mailGonderici.KayitBasariliMailiGonder(mail, oyuncuadi);
+                                }
+                                catch (Exception mailEx)
+                                {
+                                    // E-posta gönderilemezse bile kayıt işlemi tamamlanacaktır
+                                    MessageBox.Show("Kayıt tamamlandı ancak bilgilendirme e-postası gönderilemedi: " + mailEx.Message,
+                                                  "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                }
+
                                 MessageBox.Show("Kayıt başarıyla oluşturuldu!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 this.Close();
                                 new Kayıt_Giriş().Show();

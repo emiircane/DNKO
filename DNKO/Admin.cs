@@ -23,6 +23,136 @@ namespace DNKO
             tabControl1.ItemSize = new Size(0, 1);
             tabControl1.SizeMode = TabSizeMode.Fixed;
             tabControl1.Selecting += new TabControlCancelEventHandler(tabControl1_Selecting);
+
+            // Mail logları butonunu kaldırdık, PictureBox kullanacağız
+        }
+
+        // PictureBox için mail logları görüntüleme metodu
+        private void pictureBoxMailLogs_Click(object sender, EventArgs e)
+        {
+            MailLoglariniGoster();
+        }
+
+        // Mail logları için yeni form gösterme
+        private void MailLoglariniGoster()
+        {
+            Form mailLogForm = new Form();
+            mailLogForm.Text = "Mail Logları";
+            mailLogForm.Size = new Size(800, 500);
+            mailLogForm.StartPosition = FormStartPosition.CenterScreen;
+
+            DataGridView dgvMailLogs = new DataGridView();
+            dgvMailLogs.Dock = DockStyle.Fill;
+            dgvMailLogs.AllowUserToAddRows = false;
+            dgvMailLogs.AllowUserToDeleteRows = false;
+            dgvMailLogs.ReadOnly = true;
+            dgvMailLogs.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            mailLogForm.Controls.Add(dgvMailLogs);
+
+            try
+            {
+                string query = "SELECT id, alici_mail, mail_konusu, LEFT(mail_metni, 100) AS mail_ozeti, gonderim_tarihi FROM mail_logs ORDER BY gonderim_tarihi DESC";
+
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                dgvMailLogs.DataSource = dt;
+
+                // Mail içeriğini görüntülemek için çift tıklama olayı ekle
+                dgvMailLogs.CellDoubleClick += (s, args) =>
+                {
+                    if (args.RowIndex >= 0)
+                    {
+                        int mailId = Convert.ToInt32(dgvMailLogs.Rows[args.RowIndex].Cells["id"].Value);
+                        MailDetayGoster(mailId);
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Mail logları yüklenirken hata oluştu: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            mailLogForm.ShowDialog();
+        }
+
+        // Mail detaylarını gösterme
+        private void MailDetayGoster(int mailId)
+        {
+            try
+            {
+                conn.Open();
+
+                string query = "SELECT alici_mail, mail_konusu, mail_metni, gonderim_tarihi FROM mail_logs WHERE id = @id";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@id", mailId);
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    string aliciMail = reader["alici_mail"].ToString();
+                    string mailKonusu = reader["mail_konusu"].ToString();
+                    string mailMetni = reader["mail_metni"].ToString();
+                    DateTime gonderimTarihi = Convert.ToDateTime(reader["gonderim_tarihi"]);
+
+                    Form detayForm = new Form();
+                    detayForm.Text = "Mail Detayı";
+                    detayForm.Size = new Size(500, 400);
+                    detayForm.StartPosition = FormStartPosition.CenterScreen;
+
+                    TableLayoutPanel panel = new TableLayoutPanel();
+                    panel.Dock = DockStyle.Fill;
+                    panel.ColumnCount = 2;
+                    panel.RowCount = 4;
+                    panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+                    panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 80F));
+
+                    // Alıcı
+                    panel.Controls.Add(new Label() { Text = "Alıcı:", Dock = DockStyle.Fill }, 0, 0);
+                    panel.Controls.Add(new TextBox() { Text = aliciMail, Dock = DockStyle.Fill, ReadOnly = true }, 1, 0);
+
+                    // Konu
+                    panel.Controls.Add(new Label() { Text = "Konu:", Dock = DockStyle.Fill }, 0, 1);
+                    panel.Controls.Add(new TextBox() { Text = mailKonusu, Dock = DockStyle.Fill, ReadOnly = true }, 1, 1);
+
+                    // Tarih
+                    panel.Controls.Add(new Label() { Text = "Tarih:", Dock = DockStyle.Fill }, 0, 2);
+                    panel.Controls.Add(new TextBox() { Text = gonderimTarihi.ToString(), Dock = DockStyle.Fill, ReadOnly = true }, 1, 2);
+
+                    // İçerik
+                    panel.Controls.Add(new Label() { Text = "İçerik:", Dock = DockStyle.Fill }, 0, 3);
+                    TextBox txtIcerik = new TextBox()
+                    {
+                        Text = mailMetni,
+                        Dock = DockStyle.Fill,
+                        ReadOnly = true,
+                        Multiline = true,
+                        ScrollBars = ScrollBars.Vertical
+                    };
+                    panel.Controls.Add(txtIcerik, 1, 3);
+
+                    detayForm.Controls.Add(panel);
+                    detayForm.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Mail bulunamadı!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Mail detayları görüntülenirken hata oluştu: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                    conn.Close();
+            }
         }
 
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
@@ -207,6 +337,11 @@ namespace DNKO
                     MessageBox.Show("Dışa aktarma hatası: " + ex.Message);
                 }
             }
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

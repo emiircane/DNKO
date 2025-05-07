@@ -10,11 +10,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Microsoft.Data.SqlClient;
 
 namespace DNKO
 {
     public partial class hkdso : Form
     {
+        // SQL bağlantısı
+        SqlConnection conn = new SqlConnection(@"Server=DESKTOP-LC5PILU\SQLEXPRESS;Database=kullanicilar;Integrated Security=True;TrustServerCertificate=True;");
+        
         public hkdso()
         {
             InitializeComponent();
@@ -64,6 +68,9 @@ namespace DNKO
 
                 // E-postayı gönder
                 smtp.Send(mail);
+                
+                // Veritabanına kaydedelim
+                KayitEkle(kullaniciMail, mesaj);
 
                 MessageBox.Show("Mesajınız başarıyla gönderildi!", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -76,6 +83,63 @@ namespace DNKO
                 MessageBox.Show("Mesaj gönderilemedi! Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        
+        // Veritabanına kayıt ekleme metodu
+        private void KayitEkle(string email, string mesaj)
+        {
+            try
+            {
+                // Eğer mail_logs tablosu yoksa oluşturalım
+                // (Bu kodu çalıştırdıktan sonra bu fonksiyonu bir kere çalıştırınız, sonra bu kod bloğunu silebilirsiniz)
+                /*
+                if (conn.State == ConnectionState.Closed)
+                    conn.Open();
+                    
+                string createTableQuery = @"
+                IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'mail_logs')
+                BEGIN
+                    CREATE TABLE mail_logs (
+                        id INT IDENTITY(1,1) PRIMARY KEY, 
+                        alici_mail NVARCHAR(100), 
+                        mail_metni NVARCHAR(MAX), 
+                        mail_konusu NVARCHAR(100), 
+                        gonderim_tarihi DATETIME DEFAULT GETDATE()
+                    )
+                END";
+                
+                SqlCommand createCmd = new SqlCommand(createTableQuery, conn);
+                createCmd.ExecuteNonQuery();
+                
+                if (conn.State == ConnectionState.Open)
+                    conn.Close();
+                */
+                
+                // Veritabanına ekleme işlemi
+                if (conn.State == ConnectionState.Closed)
+                    conn.Open();
+
+                string query = "INSERT INTO mail_logs (alici_mail, mail_konusu, mail_metni) VALUES (@aliciMail, @mailKonusu, @mailMetni)";
+                
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@aliciMail", email);
+                    cmd.Parameters.AddWithValue("@mailKonusu", "Dilek / Şikayet / Öneri");
+                    cmd.Parameters.AddWithValue("@mailMetni", mesaj);
+                    
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Veritabanına kayıt sırasında hata oluştu: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                    conn.Close();
+            }
+        }
+        
         private void label8_Click(object sender, EventArgs e)
         {
 

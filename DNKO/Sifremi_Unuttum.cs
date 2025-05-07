@@ -58,7 +58,14 @@ namespace DNKO
 
         private string KodUret()
         {
-            return new Random().Next(100000, 999999).ToString();
+            // 5-6 haneli rastgele sayı üret (10000-999999 arası)
+            Random random = new Random();
+            int basamakSayisi = random.Next(5, 7); // 5 veya 6 basamak
+            
+            int minDeger = (int)Math.Pow(10, basamakSayisi - 1); // 10^4 = 10000 veya 10^5 = 100000
+            int maxDeger = (int)Math.Pow(10, basamakSayisi) - 1; // 10^5 - 1 = 99999 veya 10^6 - 1 = 999999
+            
+            return random.Next(minDeger, maxDeger + 1).ToString();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

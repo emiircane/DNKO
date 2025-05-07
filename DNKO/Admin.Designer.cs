@@ -38,6 +38,10 @@
             label1 = new Label();
             tabControl1 = new TabControl();
             tabPage2 = new TabPage();
+            lblRol = new Label();
+            checkBoxEngelle = new CheckedListBox();
+            comboBoxRol = new ComboBox();
+            pictureBoxMailLogs = new PictureBox();
             pictureBox7 = new PictureBox();
             pictureBox6 = new PictureBox();
             pictureBox5 = new PictureBox();
@@ -68,6 +72,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tabControl1.SuspendLayout();
             tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxMailLogs).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
@@ -88,13 +93,13 @@
             panel1.Controls.Add(label1);
             panel1.Location = new Point(-12, -11);
             panel1.Name = "panel1";
-            panel1.Size = new Size(493, 418);
+            panel1.Size = new Size(1047, 472);
             panel1.TabIndex = 0;
             // 
             // pictureBox2
             // 
             pictureBox2.Image = Properties.Resources.pngegg2;
-            pictureBox2.Location = new Point(174, 237);
+            pictureBox2.Location = new Point(461, 277);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(81, 35);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
@@ -106,7 +111,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.tik1;
-            pictureBox1.Location = new Point(270, 238);
+            pictureBox1.Location = new Point(557, 278);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(75, 34);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -117,14 +122,14 @@
             // 
             // txtSifre
             // 
-            txtSifre.Location = new Point(217, 194);
+            txtSifre.Location = new Point(504, 234);
             txtSifre.Name = "txtSifre";
             txtSifre.Size = new Size(128, 23);
             txtSifre.TabIndex = 3;
             // 
             // txtKullaniciAdi
             // 
-            txtKullaniciAdi.Location = new Point(217, 159);
+            txtKullaniciAdi.Location = new Point(504, 199);
             txtKullaniciAdi.Name = "txtKullaniciAdi";
             txtKullaniciAdi.Size = new Size(128, 23);
             txtKullaniciAdi.TabIndex = 2;
@@ -133,7 +138,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Symbol", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(158, 192);
+            label2.Location = new Point(445, 232);
             label2.Name = "label2";
             label2.Size = new Size(53, 21);
             label2.TabIndex = 1;
@@ -143,7 +148,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Symbol", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(99, 157);
+            label1.Location = new Point(386, 197);
             label1.Name = "label1";
             label1.Size = new Size(112, 21);
             label1.TabIndex = 0;
@@ -156,11 +161,15 @@
             tabControl1.Location = new Point(-2, -1);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(489, 441);
+            tabControl1.Size = new Size(1043, 489);
             tabControl1.TabIndex = 6;
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(lblRol);
+            tabPage2.Controls.Add(checkBoxEngelle);
+            tabPage2.Controls.Add(comboBoxRol);
+            tabPage2.Controls.Add(pictureBoxMailLogs);
             tabPage2.Controls.Add(pictureBox7);
             tabPage2.Controls.Add(pictureBox6);
             tabPage2.Controls.Add(pictureBox5);
@@ -180,15 +189,55 @@
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(481, 413);
+            tabPage2.Size = new Size(1035, 461);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Admin Panel";
             tabPage2.UseVisualStyleBackColor = true;
+            tabPage2.Click += tabPage2_Click;
+            // 
+            // lblRol
+            // 
+            lblRol.AutoSize = true;
+            lblRol.Location = new Point(289, 210);
+            lblRol.Name = "lblRol";
+            lblRol.Size = new Size(24, 15);
+            lblRol.TabIndex = 20;
+            lblRol.Text = "Rol";
+            // 
+            // checkBoxEngelle
+            // 
+            checkBoxEngelle.FormattingEnabled = true;
+            checkBoxEngelle.Items.AddRange(new object[] { "Engelle" });
+            checkBoxEngelle.Location = new Point(319, 236);
+            checkBoxEngelle.Name = "checkBoxEngelle";
+            checkBoxEngelle.Size = new Size(120, 22);
+            checkBoxEngelle.TabIndex = 19;
+            // 
+            // comboBoxRol
+            // 
+            comboBoxRol.FormattingEnabled = true;
+            comboBoxRol.Items.AddRange(new object[] { "Admin", "User" });
+            comboBoxRol.Location = new Point(319, 207);
+            comboBoxRol.Name = "comboBoxRol";
+            comboBoxRol.Size = new Size(121, 23);
+            comboBoxRol.TabIndex = 18;
+            // 
+            // pictureBoxMailLogs
+            // 
+            pictureBoxMailLogs.Image = Properties.Resources.log_file_icon;
+            pictureBoxMailLogs.Location = new Point(306, 406);
+            pictureBoxMailLogs.Name = "pictureBoxMailLogs";
+            pictureBoxMailLogs.Size = new Size(68, 43);
+            pictureBoxMailLogs.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBoxMailLogs.TabIndex = 16;
+            pictureBoxMailLogs.TabStop = false;
+            toolTip6.SetToolTip(pictureBoxMailLogs, "Geri Dön!");
+            pictureBoxMailLogs.Click += pictureBoxMailLogs_Click;
             // 
             // pictureBox7
             // 
             pictureBox7.Image = Properties.Resources.trash_can;
-            pictureBox7.Location = new Point(312, 278);
+            pictureBox7.Location = new Point(158, 406);
             pictureBox7.Name = "pictureBox7";
             pictureBox7.Size = new Size(68, 43);
             pictureBox7.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -200,7 +249,7 @@
             // pictureBox6
             // 
             pictureBox6.Image = Properties.Resources.recycle;
-            pictureBox6.Location = new Point(386, 229);
+            pictureBox6.Location = new Point(84, 406);
             pictureBox6.Name = "pictureBox6";
             pictureBox6.Size = new Size(68, 43);
             pictureBox6.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -212,7 +261,7 @@
             // pictureBox5
             // 
             pictureBox5.Image = Properties.Resources.save;
-            pictureBox5.Location = new Point(347, 327);
+            pictureBox5.Location = new Point(232, 406);
             pictureBox5.Name = "pictureBox5";
             pictureBox5.Size = new Size(68, 43);
             pictureBox5.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -224,7 +273,7 @@
             // pictureBox4
             // 
             pictureBox4.Image = Properties.Resources.view1;
-            pictureBox4.Location = new Point(312, 229);
+            pictureBox4.Location = new Point(10, 406);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(68, 43);
             pictureBox4.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -236,7 +285,7 @@
             // pictureBox3
             // 
             pictureBox3.Image = Properties.Resources.pngegg;
-            pictureBox3.Location = new Point(386, 278);
+            pictureBox3.Location = new Point(386, 406);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(68, 43);
             pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
@@ -341,7 +390,7 @@
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(18, 15);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(427, 172);
+            dataGridView1.Size = new Size(436, 172);
             dataGridView1.TabIndex = 0;
             // 
             // tabPage1
@@ -350,7 +399,7 @@
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(481, 413);
+            tabPage1.Size = new Size(1035, 461);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Admin Giriş";
             tabPage1.UseVisualStyleBackColor = true;
@@ -369,7 +418,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(481, 428);
+            ClientSize = new Size(1040, 484);
             Controls.Add(tabControl1);
             Controls.Add(label8);
             FormBorderStyle = FormBorderStyle.None;
@@ -383,6 +432,7 @@
             tabControl1.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxMailLogs).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
@@ -430,5 +480,9 @@
         private ToolTip toolTip5;
         private ToolTip toolTip6;
         private ToolTip toolTip7;
+        private PictureBox pictureBoxMailLogs;
+        private Label lblRol;
+        private CheckedListBox checkBoxEngelle;
+        private ComboBox comboBoxRol;
     }
 }
