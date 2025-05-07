@@ -34,3 +34,10 @@ msbuild.wrn
 !**/[Pp]ackages/build/
 # Uncomment if necessary however generally it will be regenerated when needed
 #!**/[Pp]ackages/repositories.config 
+
+# SQL files and database backups
+*.sql
+*.bak
+*.mdf
+*.ldf
+sql/ 
